@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "297296345684",
+    "firebase_url": "https://testaprendemagicalcamera.firebaseio.com",
+    "project_id": "testaprendemagicalcamera",
+    "storage_bucket": "testaprendemagicalcamera.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297296345684:android:47b543e32674cc61",
+        "android_client_info": {
+          "package_name": "cl.evilgenius.test_aprende_magical_camera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297296345684-tilquv6leh4mus19sjdavai6p3b6e9l2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cl.evilgenius.test_aprende_magical_camera",
+            "certificate_hash": "9db845f9f7b3849fd87f1660da55efffe043fddc"
+          }
+        },
+        {
+          "client_id": "297296345684-h3ak7tlsromg9v3a2d5nrgb0mhd8ilc5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB68NiIelQtS2CTTdkzUIo19AurETMN710"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297296345684-h3ak7tlsromg9v3a2d5nrgb0mhd8ilc5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
