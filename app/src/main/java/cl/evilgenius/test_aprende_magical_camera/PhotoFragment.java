@@ -3,6 +3,7 @@ package cl.evilgenius.test_aprende_magical_camera;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,10 @@ import android.widget.Toast;
 
 import com.frosquivel.magicalcamera.MagicalCamera;
 import com.frosquivel.magicalcamera.MagicalPermissions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Map;
 
@@ -44,7 +49,7 @@ public class PhotoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        imageView =view.findViewById(R.id.photoIV);
+        imageView = view.findViewById(R.id.photoIV);
 
         String[] permissions = new String[]{
                 Manifest.permission.CAMERA,
@@ -82,10 +87,9 @@ public class PhotoFragment extends Fragment {
             String path = magicalCamera.savePhotoInMemoryDevice(photo, "myPhotoName", "myDirectoryName", MagicalCamera.JPEG, true);
 
             if (path != null) {
-                Toast.makeText(getContext(), "The photo is save in device, please check this path: " + path, Toast.LENGTH_LONG).show();
-
                 imageView.setImageBitmap(photo);
-
+                uploadPhoto(path);
+                Toast.makeText(getContext(), "The photo is save in device, please check this path: /_/*****" + path, Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(getContext(), "Sorry your photo didnt write in the device", Toast.LENGTH_SHORT).show();
@@ -93,8 +97,29 @@ public class PhotoFragment extends Fragment {
     }
 
     public void takePhoto() {
-       // magicalCamera.takeFragmentPhoto(PhotoFragment.this);
+        // magicalCamera.takeFragmentPhoto(PhotoFragment.this);
         magicalCamera.takeFragmentPhoto(this);
+    }
+
+
+    //metodo para subir la foto a firebase storage
+    public void uploadPhoto(String path) {
+
+        path = "file://" + path;
+        String url = "gs://testaprendemagicalcamera.appspot.com/folderExample/file_name.jpg";
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReferenceFromUrl(url);
+
+        storageReference.putFile(Uri.parse(path)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                String url = taskSnapshot.getDownloadUrl().toString();
+                Log.e("URL: ", url);
+                Toast.makeText(getContext(), "Foto subida A FIREBASE YAAAY", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
 }
